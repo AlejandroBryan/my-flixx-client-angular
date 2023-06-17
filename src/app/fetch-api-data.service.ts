@@ -4,30 +4,27 @@ import { Observable, throwError, catchError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
+const apiUrl: String = 'http://localhost:5000/api/v1/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FetchApiDataService {
 
-  constructor(private http: HttpClient) {
-
-
-  }
+  constructor(private http: HttpClient) {}
 
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+    return this.http.post(apiUrl + 'users/register', userDetails).pipe(
       catchError(this.handleError)
     );
   }
 
   // Making the api call for the user login endpoint
-  public useLogin(userDetails: any): Observable<any> {
+  public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
+    return this.http.post(apiUrl + 'users/login', userDetails).pipe(
       catchError(this.handleError)
     );
   }
@@ -62,8 +59,8 @@ export class FetchApiDataService {
       );
   }
 
-   // Making the api call for the user registration endpoint
-   public getOneDirector(director: string): Observable<any> {
+  // Making the api call for the user registration endpoint
+  public getOneDirector(director: string): Observable<any> {
     const token = localStorage.getItem('token');
 
     return this.http.post(apiUrl + 'movies/director' + director,
@@ -77,20 +74,20 @@ export class FetchApiDataService {
       );
   }
 
-     // Making the api call for the user registration endpoint
-     public getOneMovieByGenres(genres: string): Observable<any> {
-      const token = localStorage.getItem('token');
-  
-      return this.http.post(apiUrl + 'movies/genres' + genres,
-        {
-          header: new HttpHeaders({
-            Authorization: 'Bearer ' + token,
-          })
-        }).pipe(
-          map(this.extractResponseData),
-          catchError(this.handleError)
-        );
-    }
+  // Making the api call for the user registration endpoint
+  public getOneMovieByGenres(genres: string): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    return this.http.post(apiUrl + 'movies/genres' + genres,
+      {
+        header: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        })
+      }).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
+  }
 
   // Non-typed response extraction
   private extractResponseData(res: any): any {
