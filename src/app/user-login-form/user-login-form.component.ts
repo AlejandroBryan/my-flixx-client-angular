@@ -1,5 +1,6 @@
 
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 // You'll use this import to close the dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
@@ -21,21 +22,23 @@ export class UserLoginFormComponent {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar,
+    private router: Router
+    ) { }
 
   ngOnInit(): void { }
 
   loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe((result) => {
+    this.fetchApiData.userLogin(this.userData).subscribe((result :any) => {
       localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
-  // Logic for a successful user registration goes here! (To be implemented)
-     this.dialogRef.close(); // This will close the modal on success!
-     this.snackBar.open(result, 'OK', {
+     this.dialogRef.close();
+     this.router.navigate(['movies']);
+     this.snackBar.open(result.message, 'OK', {
         duration: 2000
      });
     }, (result) => {
-      this.snackBar.open(result, 'OK', {
+      this.snackBar.open(result.message, 'OK', {
         duration: 2000
       });
     });

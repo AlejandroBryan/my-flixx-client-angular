@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, catchError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, throwError} from 'rxjs';
+import { map,  catchError  } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl: String = 'http://localhost:5000/api/v1/';
@@ -32,10 +32,11 @@ export class FetchApiDataService {
   // Making the api call for fetching all movies endpoint
   public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
+    
 
-    return this.http.post(apiUrl + 'movies',
+    return this.http.get(apiUrl + 'movies',
       {
-        header: new HttpHeaders({
+        headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         })
       }).pipe(
@@ -48,9 +49,9 @@ export class FetchApiDataService {
   public getOneMovies(title: string): Observable<any> {
     const token = localStorage.getItem('token');
 
-    return this.http.post(apiUrl + 'movies/' + title,
+    return this.http.get(apiUrl + 'movies/' + title,
       {
-        header: new HttpHeaders({
+        headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         })
       }).pipe(
@@ -103,7 +104,6 @@ export class FetchApiDataService {
         `Error Status code ${error.status}, ` +
         `Error body is: ${error.error}`);
     }
-    return new Error(
-      'Something bad happened; please try again later.');
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }
