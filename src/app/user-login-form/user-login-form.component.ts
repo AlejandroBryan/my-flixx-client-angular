@@ -17,26 +17,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./user-login-form.component.scss']
 })
 export class UserLoginFormComponent {
-  @Input() userData = { Username: '', Password: '',};
+  @Input() userData = { Username: '', Password: '', };
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit(): void { }
 
   loginUser(): void {
-    this.fetchApiData.userLogin(this.userData).subscribe((result :any) => {
+    this.fetchApiData.userLogin(this.userData).subscribe((result: any) => {
       localStorage.setItem('user', JSON.stringify(result.user));
       localStorage.setItem('token', result.token);
-     this.dialogRef.close();
-     this.router.navigate(['movies']);
-     this.snackBar.open(result.message, 'OK', {
+      this.dialogRef.close();
+      this.router.navigate(['movies']);
+      this.snackBar.open(result.message, 'OK', {
         duration: 2000
-     });
+      });
     }, (result) => {
       this.snackBar.open(result.message, 'OK', {
         duration: 2000

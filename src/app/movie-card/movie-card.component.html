@@ -1,15 +1,31 @@
+<app-navbar></app-navbar>
 
-<div style="display: flex">
-  <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto">
+<h1>movies</h1>
+<div style="display: flex; width: 100%; overflow: auto">
+  
+  <mat-card *ngFor="let movie of movies" style="flex: 1 1 auto; margin: 1rem">
+    
     <mat-card-header>
       <mat-card-title>{{ movie.Title }}</mat-card-title>
+      <mat-card-subtitle *ngFor="let director of movie.Director"
+        >
+          {{ director.Name  }}
+      </mat-card-subtitle>
     </mat-card-header>
     <img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
     <mat-card-actions>
-      <button mat-button color="primary">Genre</button>
-      <button mat-button color="primary">Director</button>
-      <button mat-button color="primary">Synopsis</button>
-      <mat-icon>favorite_border</mat-icon>
+      <a style="margin-right: auto;" variant="text" routerLink="{{movie.Title}}">Read More</a>
+      <button *ngIf="!isFavorite(movie._id)" mat-icon-button (click)="addFavorite(movie._id)" color="warn" matTooltip="Add to your favorites" >
+        <mat-icon>favorite_border</mat-icon>
+
+      </button>
+
+      <button *ngIf="isFavorite(movie._id)" mat-icon-button (click)="removeFavorite(movie._id)" color="warn"
+      matTooltip="Remove from favorites">
+      <mat-icon>favorite</mat-icon>
+    </button>
+      
     </mat-card-actions>
   </mat-card>
 </div>
+

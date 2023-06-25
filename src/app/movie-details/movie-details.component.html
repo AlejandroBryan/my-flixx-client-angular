@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+<div class="profile__page" *ngIf="movie">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title class="mat-headline-5">
+        {{ movie.Title }}
+      </mat-card-title>
+
+      <mat-card-subtitle *ngFor="let genres of movie.Genres">
+        {{ genres.Name }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" />
+    <mat-card-content>
+      <div>{{ movie.Release_year }}</div>
+      <p>
+        {{ movie.Description }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="example-card">
+    <mat-card-content *ngFor="let director of movie.Director">
+      {{ director.Name }}
+      <p>
+        {{ director.Biography }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

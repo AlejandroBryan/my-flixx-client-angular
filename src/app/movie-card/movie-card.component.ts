@@ -1,29 +1,72 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent {
-[x: string]: any;
+
   movies: any[] = [];
 
-  constructor(public fetchApiData: FetchApiDataService) { }
+
+  constructor(
+    protected fetchApiData: FetchApiDataService,
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog,
+
+
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.getMovies();
+
+
+
   }
 
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp.data;
-      //console.log(this.movies);
-     
       return this.movies;
-        
+
     });
   }
+
+  addFavorite(id: string): void {
+    this.fetchApiData.addFavoriteMovie(id).subscribe((result) => {
+
+      this.snackBar.open('Movie added to favorites.', 'OK', {
+        duration: 2000
+      });
+    });
+  }
+
+  /**
+  * Calls the check favorite movie method on the API.
+  * @param id The movie ID
+  */
+  isFavorite(id: string): boolean {
+    return this.fetchApiData.isFavoriteMovie(id);
+  }
+
+  /**
+   * Calls the delete favorite movie method on the API.
+   * @param id The movie ID
+   */
+  removeFavorite(id: string): void {
+    this.fetchApiData.deleteFavoriteMovie(id).subscribe((result) => {
+      this.snackBar.open('Movie removed from favorites.', 'OK', {
+        duration: 2000
+      });
+    });
+  }
+
 
 
 }

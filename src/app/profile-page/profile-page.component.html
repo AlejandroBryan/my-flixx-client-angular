@@ -1,0 +1,109 @@
+<app-navbar></app-navbar>
+<div *ngIf="user" class="profile__page">
+  <mat-card>
+    <mat-card-content>{{ user.Firstname }}</mat-card-content>
+    <button mat-button (click)="deleteUser()" color="warn">
+      Remove account permanently
+    </button>
+  </mat-card>
+  <div>
+    <mat-card-content>
+      <h2>Update Profile</h2>
+      <form>
+        <p>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="userData.Firstname"
+              type="text"
+              placeholder="Firstname"
+              name="Firstname"
+              required
+            />
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="userData.Lastname"
+              type="text"
+              placeholder="Lastname"
+              name="Lastname"
+              required
+            />
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="userData.Password"
+              minlength="8"
+              type="password"
+              placeholder="Password"
+              name="Password"
+              required
+            />
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="userData.Email"
+              type="email"
+              placeholder="Email"
+              name="Email"
+              required
+            />
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field>
+            <input
+              matInput
+              [(ngModel)]="userData.Birthday"
+              type="date"
+              placeholder="Birthday"
+              name="Birthday"
+            />
+          </mat-form-field>
+        </p>
+
+        <button mat-raised-button (click)="editUser()" color="primary">
+          Update
+        </button>
+      </form>
+    </mat-card-content>
+  </div>
+</div>
+
+<div>
+  <h3>Favorites Movies</h3>
+</div>
+
+<div class="profile__page">
+  <mat-card
+    class="card"
+    *ngFor="let movies of favoriteMovies"
+    style="flex: 1 1 auto; margin: 1rem"
+  >
+    <mat-card-header>
+      <mat-card-title>{{ movies.Title }}</mat-card-title>
+    </mat-card-header>
+    <img src="{{ movies.ImagePath }}" alt="{{ movies.Title }}" />
+
+    <mat-card-actions>
+      <a
+        style="margin-right: auto"
+        variant="text"
+        routerLink="/movies/{{ movies.Title }}"
+        >Read More</a
+      >
+    </mat-card-actions>
+  </mat-card>
+</div>
