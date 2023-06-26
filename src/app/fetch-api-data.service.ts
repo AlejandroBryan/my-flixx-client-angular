@@ -5,7 +5,7 @@ import { map,  catchError  } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl: String = 'https://myflixx.herokuapp.com/api/v1/';
-//https://myflixx.herokuapp.com
+
 @Injectable({
   providedIn: 'root'
 })
@@ -193,12 +193,12 @@ export class FetchApiDataService {
 
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
+      console.error('Some error occurred:', error.message);
     } else {
       console.error(
         `Error Status code ${error.status}, ` +
         `Error body is: ${error.error.message}`);
     }
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(() => new Error(error.error.message));
   }
 }
