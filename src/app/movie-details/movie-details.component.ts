@@ -19,15 +19,16 @@ export class MovieDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-
     this.getMovieDetails()
-
   }
+
+  /**
+   * fetch a single movie details
+   */
 
   getMovieDetails(): void {
     const Title = this.route.snapshot.paramMap.get('title') as string;
-    console.log(Title)
+   
     this.fetchApiDataService.getOneMovies(Title)
       .subscribe((res: any) => {
         this.movie = res.data;

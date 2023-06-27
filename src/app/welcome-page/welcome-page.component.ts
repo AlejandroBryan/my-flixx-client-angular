@@ -11,18 +11,13 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class WelcomePageComponent {
   constructor(public dialog: MatDialog) { }
+  //open the dialog with user registration form
   openUserRegistrationDialog(): void {
     this.dialog.open(UserRegistrationFormComponent, { width: '280' });
   }
+  //open the dialog with user login form
   openUserLoginDialog(): void {
     this.dialog.open(UserLoginFormComponent, { width: '280' });
   }
-
-  openMoviesDialog(): void {
-    this.dialog.open(MovieCardComponent, {
-      width: '500px'
-    });
-  }
-
 
 }

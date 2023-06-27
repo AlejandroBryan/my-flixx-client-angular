@@ -18,18 +18,17 @@ export class MovieCardComponent {
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
 
-
   ) {
 
   }
 
   ngOnInit(): void {
     this.getMovies();
-
-
-
   }
 
+  /**
+   * fetch all the movies from the database
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp.data;
@@ -37,6 +36,11 @@ export class MovieCardComponent {
 
     });
   }
+
+  /**
+   * add the a movies to the `favoritesMovies` lists
+   * @param id 
+   */
 
   addFavorite(id: string): void {
     this.fetchApiData.addFavoriteMovie(id).subscribe((result) => {

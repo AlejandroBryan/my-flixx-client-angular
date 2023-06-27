@@ -8,18 +8,24 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private router: Router){
+  constructor(private router: Router) {
 
   }
 
+  // navigate to the /movies
   toMovies(): void {
     this.router.navigate(['movies']);
   }
 
+  // navigate to the /profile
   toProfile(): void {
     this.router.navigate(['profile']);
   }
 
+  /**
+   * navigate back to the welcome page
+   * clear the localStorage
+   */
   logOut(): void {
     this.router.navigate(['welcome']);
     localStorage.clear();
