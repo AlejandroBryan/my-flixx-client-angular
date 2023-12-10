@@ -1,33 +1,26 @@
-
 <mat-toolbar color="secondary">
-  
-    <mat-toolbar-row>
-      
-      <button mat-button class="brand" (click)="toMovies()" >myFlix</button>
-      <span class="example-spacer"></span>
-   
-      <button
+  <mat-toolbar-row>
+    <button mat-button class="brand" (click)="toMovies()">myFlix</button>
+    <span class="example-spacer"></span>
+
+    <button
       (click)="toProfile()"
-        mat-icon-button
-        class="example-icon favorite-icon"
-        aria-label="Example icon-button with heart icon"
-        matTooltip="profile"
-      >
-        <mat-icon>account_circle</mat-icon>
-      </button>
-  
-      <button
+      mat-icon-button
+      class="example-icon favorite-icon"
+      aria-label="Example icon-button with heart icon"
+      matTooltip="profile"
+    >
+      <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <button
       (click)="logOut()"
-        mat-icon-button
-        class="example-icon"
-        aria-label="Example icon-button with share icon"
-        matTooltip="logout"
-      >
-        <mat-icon>arrow_forward</mat-icon>
-      </button>
-    
-    </mat-toolbar-row>
-
-
-  
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with share icon"
+      matTooltip="logout"
+    >
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </mat-toolbar-row>
 </mat-toolbar>

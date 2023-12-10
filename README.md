@@ -1,4 +1,4 @@
-# MyFlixAngularClient
+# my-flixx-client-angular
 Description:
 In this Repository i will implement my learned skill on the Client-site programming and using Angular at Carrerfoundry. It consist of building an single page application "SPA" which will consume the fetched data from [Movie-api](https://github.com/AlejandroBryan/movie-api), allowing the users to register, login, delete an account, add and delete from movies favorite list.
 
