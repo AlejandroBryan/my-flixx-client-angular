@@ -33,7 +33,7 @@ export class UserLoginFormComponent {
       this.dialogRef.close();
       this.router.navigate(['movies']);
       this.snackBar.open(result.message, 'OK', {
-        duration: 2000
+        duration: 2000,
       });
     }, (result) => {
       this.snackBar.open(result.message, 'OK', {
